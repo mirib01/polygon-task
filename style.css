@@ -1,73 +1,40 @@
-/* GENERAL RESET */
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-    font-family: 'Open Sans', Arial, sans-serif;
-    background: white;
-    margin: 15px;
-    overflow-x: hidden;
-}
-
-/* MAIN FLEX GRID */
-#all_game_elements {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 40px;        /* ← מרחק יפה בין שלושת האזורים */
-    margin-top: 20px;
-}
-
-/* BOARD SECTIONS */
-.board-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-}
-
-/* RESPONSIVE SQUARES */
-.board, .frame {
-    aspect-ratio: 1 / 1;
-    width: min(3vw, 30px);
-    max-width: 30px;
-    text-align: center;
-    vertical-align: middle;
-    font-size: min(2vw, 14px);
+table {
+    border-collapse: collapse;
+    user-select: none;
 }
 
 .frame {
+    width: 28px;
+    height: 28px;
     background-color: #C6E0B4;
+    text-align: center;
 }
 
 .board {
+    width: 28px;
+    height: 28px;
     background-color: #f1f1f1;
 }
 
 .board-selected {
-    background-color: #f9f480 !important;
+    background-color: #fff59d;
 }
 
-.board-tutorial-blue { background-color: cyan; }
-
-/* CANVAS */
-#Canvas {
-    width: min(35vw, 340px);
-    height: min(35vw, 340px);
+canvas {
     background-color: #f1f1f1;
+    border: 1px solid #ddd;
 }
 
-/* BUTTONS ALWAYS VISIBLE */
-#design_buttons_container {
+.horizontal {
     display: flex;
-    gap: 15px;
+    flex-direction: row;
     justify-content: center;
-    margin-top: 10px;
+    margin: 10px;
 }
 
-/* RESULTS TABLE */
-.results-table {
-    background: #f1f1f1;
-    min-width: 175px;
-    margin-top: 10px;
+.vertical {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
 }
