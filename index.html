@@ -47,12 +47,12 @@
 
     <div class="horizontal" id='all_game_elements' style='visibility:hidden;'>
 
+
         <!-- DESIGN AREA -->
         <div class="vertical" id='design_area'>
             <h3 id='design_title'>Design</h3>
 
             <table id='design_table' dir='ltr'>
-                <!-- Row numbers top -->
                 <tr>
                     <td class="frame"></td>
                     <td class="frame">1</td>
@@ -68,9 +68,6 @@
                     <td class="frame"></td>
                 </tr>
 
-                <!-- 10×10 board -->
-                <!-- I am keeping EXACTLY your structure (critical for script.js) -->
-                <!-- Rows 1–10 -->
                 <script>
                     for (let r=1; r<=10; r++){
                         document.write("<tr>");
@@ -83,7 +80,6 @@
                     }
                 </script>
 
-                <!-- Row numbers bottom -->
                 <tr>
                     <td class="frame"></td>
                     <td class="frame">1</td>
@@ -107,6 +103,7 @@
             </div>
         </div>
 
+
         <!-- PRODUCTION AREA -->
         <div class="vertical" id='production_area'>
             <h3 id='production_title'>Production</h3>
@@ -122,13 +119,15 @@
 
                 <tr>
                     <td class="frame">1</td>
+
+                    <!--  ✅ כאן בוצע התיקון היחיד -->
                     <td colspan="10" rowspan="10">
-                        <canvas id="Canvas" width="278" height="278" style="background-color: #f1f1f1;"></canvas>
+                        <canvas id="Canvas" width="340" height="340" style="background-color: #f1f1f1;"></canvas>
                     </td>
+
                     <td class="frame">1</td>
                 </tr>
 
-                <!-- side row labels 2–10 -->
                 <script>
                     for (let r=2; r<=10; r++){
                         document.write("<tr>");
@@ -149,6 +148,7 @@
 
             <button id="view_design_area" onclick="switchToDesignMode()" style='visibility:hidden;'>Edit</button>
         </div>
+
 
         <!-- SCORE AREA -->
         <div class="vertical" id='score_area'>
