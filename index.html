@@ -3,92 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Polygon</title>
 
-    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
-    <!-- Styles -->
-    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <link rel="stylesheet" type="text/css" href="style.css">
 
-    <!-- Scripts -->
     <script defer src="heb.js"></script>
     <script defer src="eng.js"></script>
     <script defer src="script.js"></script>
-
-    <title>Polygon</title>
 </head>
 
 <body>
 
-    <!-- Language selection -->
-    <div id="language_menu">
-        <button onclick="chooseLanguage('eng')">English</button>
-        <button onclick="chooseLanguage('heb')">עברית</button>
-    </div>
+    <div id="tutorial_controls">
+        <h3>
+            <div id="messages"></div>
+        </h3>
 
-    <!-- Intro -->
-    <div id="intro_screen" style="display:none;">
-        <h1 id="intro_large_header"></h1>
-        <h1 id="intro_large_header_2"></h1>
-        <h3 id="intro_small_header"></h3>
-
-        <input id="user_id" type="text" placeholder="Enter your ID">
-        <button id="start_button" onclick="startTutorial()"></button>
-    </div>
-
-    <!-- Tutorial -->
-    <div id="tutorial_screen" style="display:none;">
-
-        <h2 id="tutorial_header"></h2>
-        <div id="tutorial_text"></div>
-
-        <div id="tutorial_controls">
-            <button id="tutorial_back" onclick="onTutorialBack()"></button>
-            <button id="tutorial_next" onclick="onTutorialNext()"></button>
-        </div>
-    </div>
-
-    <!-- Game Area -->
-    <div id="game_area" style="display:none;">
-
-        <div id="timer_container">
-            <span id="timer_desc"></span>: <span id="timer_value"></span>
-        </div>
-
-        <h2 id="game_design_title"></h2>
-
-        <div class="horizontal">
-            <!-- Design Board -->
-            <table id="design_board" class="board"></table>
-
-            <div style="width: 20px;"></div>
-
-            <!-- Production Board -->
-            <table id="production_board" class="board"></table>
-        </div>
-
-        <div id="game_buttons">
-            <button id="design_button_submit" onclick="onSubmitStructure()"></button>
-            <button id="design_button_clearall" onclick="clearAll()"></button>
-        </div>
-
-        <!-- Score area -->
-        <div id="score_area">
-            <h3 id="score_title"></h3>
-            <p><span id="scoreboard_grey_cells"></span>: <span id="grey_cells_value"></span></p>
-            <p><span id="scoreboard_penalty_cells"></span>: <span id="penalty_cells_value"></span></p>
-            <p><span id="scoreboard_effiency"></span>: <span id="efficiency_value"></span></p>
-            <p><span id="scoreboard_high_score"></span>: <span id="high_score_value"></span></p>
-        </div>
-
-    </div>
-
-    <!-- End of Game -->
-    <div id="end_screen" style="display:none;">
-        <h2 id="test_end"></h2>
-        <p id="final_score_summary"></p>
+        <horizontal>
+            <button id="tutorial_back" onclick="onTutorialBack()">Back</button>
+            <div>&nbsp;&nbsp;</div>
+            <button id="tutorial_next" onclick="onTutorialNext()">Next</button>
+        </horizontal>
     </div>
 
 </body>
