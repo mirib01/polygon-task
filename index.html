@@ -3,31 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Polygon</title>
 
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="style.css">
-
+    <link rel="stylesheet" href="style.css">
     <script defer src="heb.js"></script>
     <script defer src="eng.js"></script>
     <script defer src="script.js"></script>
+
+    <title>Polygon</title>
 </head>
 
 <body>
 
-    <div id="tutorial_controls">
-        <h3>
-            <div id="messages"></div>
-        </h3>
+    <!-- LANGUAGE BUTTONS -->
+    <button id="eng_btn" onclick="switchToEnglish()">English</button>
+    <button id="heb_btn" onclick="switchToHebrew()">עברית</button>
 
-        <horizontal>
-            <button id="tutorial_back" onclick="onTutorialBack()">Back</button>
-            <div>&nbsp;&nbsp;</div>
-            <button id="tutorial_next" onclick="onTutorialNext()">Next</button>
-        </horizontal>
+    <!-- INTRO SCREEN -->
+    <div id="intro_screen" class="screen">
+        <div id="intro_text"></div>
+    </div>
+
+    <!-- TUTORIAL SCREEN -->
+    <div id="tutorial_screen" class="screen">
+        <div id="tutorial_text"></div>
+    </div>
+
+    <!-- GAME SCREEN -->
+    <div id="game_screen" class="screen">
+        <div id="messages"></div>
+        <canvas id="polygonCanvas"></canvas>
+    </div>
+
+    <!-- TUTORIAL NAVIGATION -->
+    <div id="tutorial_controls">
+        <button id="tutorial_back" onclick="onTutorialBack()">Back</button>
+        <button id="tutorial_next" onclick="onTutorialNext()">Next</button>
     </div>
 
 </body>
