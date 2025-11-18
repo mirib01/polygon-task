@@ -1,129 +1,282 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Polygon Task</title>
 
-    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" type="text/css" href="style.css" />
 
     <!-- Only English -->
     <script defer src="eng.js"></script>
+
+    <!-- Main logic -->
     <script defer src="script.js"></script>
 
     <style>
-        body { margin:20px; font-family:'Open Sans',sans-serif; }
-        table td { width:25px; height:25px; }
+        body {
+            margin: 20px;
+            font-family: "Open Sans", sans-serif;
+        }
+
+        table td {
+            width: 25px;
+            height: 25px;
+        }
     </style>
 </head>
 
 <body>
+    <!-- ================= INTRO SCREEN ================= -->
+    <div id="intro" style="display: flex; flex-direction: column; align-items: center">
+        <h1 id="largeHeader">Welcome to the Game of -</h1>
+        <h2 id="largeHeader2ndRow">Structures</h2>
 
-<!-- ================= INTRO ================= -->
+        <div id="smallHeader" style="margin: 20px; white-space: pre-line"></div>
 
-<div id="intro" style="display:flex; flex-direction:column; align-items:center;">
-    <h1 id="largeHeader">Welcome to the Game of -</h1>
-    <h2 id="largeHeader2ndRow">Structures</h2>
-
-    <div id="smallHeader" style="margin:20px; white-space:pre-line;"></div>
-
-    <button id="introStart" onclick="startBtnPressed()">Start</button>
-</div>
-
-<!-- ================= MAIN GAME AREA ================= -->
-
-<div id="all_game_elements" style="display:none; flex-direction:column; align-items:center;">
-
-    <div id="tutorial_controls" style="margin:10px;">
-        <button id="tutorial_back" onclick="onTutorialBack()">&lt; Back</button>
-        <div style="width:20px;"></div>
-        <button id="tutorial_next" onclick="onTutorialNext()">Next &gt;</button>
+        <button id="introStart" onclick="startBtnPressed()">Start</button>
     </div>
 
-    <h3 id="messages" style="white-space:pre-line; min-height:60px;"></h3>
+    <!-- ================ GAME AREA ================= -->
+    <div id="all_game_elements" style="display: none; flex-direction: column; align-items: center">
+        <!-- Tutorial controls -->
+        <div id="tutorial_controls" style="margin: 10px">
+            <button id="tutorial_back" onclick="onTutorialBack()">&lt; Back</button>
+            <div style="width: 20px"></div>
+            <button id="tutorial_next" onclick="onTutorialNext()">Next &gt;</button>
+        </div>
 
-    <div style="display:flex; flex-direction:row; gap:40px; margin-top:20px;">
+        <!-- messages -->
+        <h3 id="messages" style="white-space: pre-line; min-height: 60px"></h3>
 
-        <!-- ===== DESIGN BOARD ===== -->
-        <div id="design_area" style="visibility:hidden;">
-            <h3 id="design_title">Design</h3>
+        <!-- Boards Row -->
+        <div style="display: flex; flex-direction: row; gap: 40px; margin-top: 20px">
+            <!-- ===== DESIGN BOARD ===== -->
+            <div id="design_area" style="visibility: hidden">
+                <h3 id="design_title">Design</h3>
 
-            <table id="design_table" border="1" cellspacing="0" cellpadding="0">
-                <tbody>
+                <table id="design_table" border="1" cellspacing="0" cellpadding="0">
+                    <tbody>
+                        <!-- Top frame -->
+                        <tr>
+                            <td class="frame"></td>
+                            <td class="frame"></td>
+                            <td class="frame"></td>
+                            <td class="frame"></td>
+                            <td class="frame"></td>
+                            <td class="frame"></td>
+                            <td class="frame"></td>
+                            <td class="frame"></td>
+                            <td class="frame"></td>
+                            <td class="frame"></td>
+                            <td class="frame"></td>
+                            <td class="frame"></td>
+                        </tr>
 
-                    <!-- Top frame -->
-                    <tr>
-                        <td class="frame"></td><td class="frame"></td><td class="frame"></td><td class="frame"></td>
-                        <td class="frame"></td><td class="frame"></td><td class="frame"></td><td class="frame"></td>
-                        <td class="frame"></td><td class="frame"></td><td class="frame"></td><td class="frame"></td>
-                    </tr>
+                        <!-- 10 board rows -->
+                        <!-- Each row: frame + 10 cells + frame -->
+                        <!-- These 10 rows MUST exist for script.js to work -->
+                        <!-- Row template repeated 10 times -->
 
-                    <!-- 10 board rows -->
-                    <!-- Each row: 1 frame + 10 cells + 1 frame -->
-                    ${Array.from({length:10}).map(()=>`
-                    <tr>
-                        <td class="frame"></td>
-                        <td class="board"></td><td class="board"></td><td class="board"></td><td class="board"></td><td class="board"></td>
-                        <td class="board"></td><td class="board"></td><td class="board"></td><td class="board"></td><td class="board"></td>
-                        <td class="frame"></td>
-                    </tr>`).join("")}
+                        <tr>
+                            <td class="frame"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="frame"></td>
+                        </tr>
 
-                    <!-- Bottom frame -->
-                    <tr>
-                        <td class="frame"></td><td class="frame"></td><td class="frame"></td><td class="frame"></td>
-                        <td class="frame"></td><td class="frame"></td><td class="frame"></td><td class="frame"></td>
-                        <td class="frame"></td><td class="frame"></td><td class="frame"></td><td class="frame"></td>
-                    </tr>
+                        <tr>
+                            <td class="frame"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="frame"></td>
+                        </tr>
 
-                </tbody>
-            </table>
+                        <tr>
+                            <td class="frame"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="frame"></td>
+                        </tr>
 
-            <div style="margin-top:10px; display:flex; gap:10px;">
-                <button id="design_button_submit">Test</button>
+                        <tr>
+                            <td class="frame"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="frame"></td>
+                        </tr>
+
+                        <tr>
+                            <td class="frame"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="frame"></td>
+                        </tr>
+
+                        <tr>
+                            <td class="frame"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="frame"></td>
+                        </tr>
+
+                        <tr>
+                            <td class="frame"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="frame"></td>
+                        </tr>
+
+                        <tr>
+                            <td class="frame"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="frame"></td>
+                        </tr>
+
+                        <tr>
+                            <td class="frame"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="frame"></td>
+                        </tr>
+
+                        <tr>
+                            <td class="frame"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="board"></td>
+                            <td class="frame"></td>
+                        </tr>
+                    </tbody>
+                </table>
+
                 <button id="design_button_clearall" onclick="clear_call_button_press()">Clear</button>
+                <button id="design_button_submit">Test</button>
+            </div>
+
+            <!-- ===== PRODUCTION AREA ===== -->
+            <div id="production_area" style="visibility: hidden">
+                <h3 id="production_title">Production</h3>
+                <canvas id="Canvas" width="300" height="300" style="border: 1px solid black"></canvas>
+
+                <div id="error_messages" style="color: red; min-height: 30px"></div>
+            </div>
+
+            <!-- ===== SCORE AREA ===== -->
+            <div id="score_area" style="visibility: hidden">
+                <h3 id="score_title">Results</h3>
+
+                <table>
+                    <tr>
+                        <td id="scoreboard_grey_cells">Blocks</td>
+                        <td id="markedCells"></td>
+                    </tr>
+
+                    <tr>
+                        <td id="scoreboard_penalty_cells">Mismatched</td>
+                        <td id="penaltyCells"></td>
+                    </tr>
+
+                    <tr>
+                        <td id="scoreboard_effiency">Structure's cost</td>
+                        <td id="score"></td>
+                    </tr>
+
+                    <tr id="table_high_score">
+                        <td id="scoreboard_high_score">Your lowest Structure's cost</td>
+                        <td id="highScore"></td>
+                    </tr>
+                </table>
+
+                <div id="counter" style="margin-top: 10px"></div>
             </div>
         </div>
-
-        <!-- ===== PRODUCTION AREA ===== -->
-        <div id="production_area" style="visibility:hidden;">
-            <h3 id="production_title">Production</h3>
-
-            <canvas id="Canvas" width="300" height="300" style="border:1px solid #000;"></canvas>
-
-            <div id="error_messages" style="color:red; margin-top:10px;"></div>
-        </div>
-
     </div>
-
-    <!-- SCORE AREA -->
-    <div id="score_area" style="visibility:hidden; margin-top:20px;">
-        <h3 id="score_title">Results</h3>
-
-        <table id="results_table" border="1" cellspacing="0" cellpadding="5">
-            <tr>
-                <td id="scoreboard_grey_cells">Blocks</td>
-                <td><span id="markedCells"></span></td>
-            </tr>
-            <tr>
-                <td id="scoreboard_penalty_cells">Mismatched</td>
-                <td><span id="penaltyCells"></span></td>
-            </tr>
-            <tr>
-                <td id="scoreboard_effiency">Structure's cost</td>
-                <td><span id="score"></span></td>
-            </tr>
-            <tr>
-                <td id="scoreboard_high_score">Your lowest Structure's cost</td>
-                <td><span id="highScore"></span></td>
-            </tr>
-        </table>
-
-    </div>
-
-</div>
-
 </body>
+
 </html>
