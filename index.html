@@ -11,143 +11,109 @@
 
     <link rel="stylesheet" type="text/css" href="style.css">
 
-    <!-- ONLY ENGLISH -->
+    <!-- only English -->
     <script defer src="eng.js"></script>
 
-    <!-- main script -->
+    <!-- main logic -->
     <script defer src="script.js"></script>
 
     <style>
-        body {
-            margin: 20px;
-            font-family: 'Open Sans', sans-serif;
-        }
+        body { margin: 20px; font-family:'Open Sans', sans-serif; }
+        table td { width:25px; height:25px; }
     </style>
 </head>
 
 <body>
 
-    <!-- ================= INTRO SCREEN ================= -->
-    <div id="intro" style="display:flex; flex-direction:column; align-items:center;">
-        <h1 id="largeHeader">Welcome to the Game of -</h1>
-        <h2 id="largeHeader2ndRow">Structures</h2>
+<!-- ================= INTRO SCREEN ================= -->
 
-        <div id="smallHeader" style="margin:20px; white-space:pre-line;"></div>
+<div id="intro" style="display:flex; flex-direction:column; align-items:center;">
+    <h1 id="largeHeader">Welcome to the Game of -</h1>
+    <h2 id="largeHeader2ndRow">Structures</h2>
 
-        <button id="introStart" onclick="startBtnPressed()">
-            Start
-        </button>
+    <div id="smallHeader" style="margin:20px; white-space:pre-line;"></div>
+
+    <button id="introStart" onclick="startBtnPressed()">Start</button>
+</div>
+
+
+<!-- ================ GAME AREA ================= -->
+
+<div id="all_game_elements" style="display:none; flex-direction:column; align-items:center;">
+
+    <!-- Tutorial controls -->
+    <div id="tutorial_controls" style="margin:10px;">
+        <button id="tutorial_back" onclick="onTutorialBack()">&lt; Back</button>
+        <div style="width:20px;"></div>
+        <button id="tutorial_next" onclick="onTutorialNext()">Next &gt;</button>
     </div>
 
-    <!-- ================= GAME ELEMENTS ================= -->
-    <div id="all_game_elements" style="display:none; flex-direction:column; align-items:center;">
+    <!-- messages -->
+    <h3 id="messages" style="white-space:pre-line; min-height:60px;"></h3>
 
-        <!-- TUTORIAL CONTROLS -->
-        <div id="tutorial_controls" style="margin:10px;">
-            <button id="tutorial_back" onclick="onTutorialBack()">&lt; Back</button>
-            <div style="width:20px;"></div>
-            <button id="tutorial_next" onclick="onTutorialNext()">Next &gt;</button>
-        </div>
 
-        <!-- MESSAGE TEXT -->
-        <h3 id="messages" style="white-space:pre-line; min-height:60px;"></h3>
+    <!-- Boards Row -->
+    <div style="display:flex; flex-direction:row; gap:40px; margin-top:20px;">
 
-        <!-- GRID AREAS -->
-        <div style="display:flex; flex-direction:row; gap:40px; margin-top:20px;">
 
-            <!-- ===== DESIGN BOARD ===== -->
-            <div id="design_area" style="visibility:hidden;">
-                <h3 id="design_title">Design</h3>
+        <!-- ===== DESIGN BOARD ===== -->
+        <div id="design_area" style="visibility:hidden;">
+            <h3 id="design_title">Design</h3>
 
-                <table id="design_table" border="1" cellspacing="0" cellpadding="0">
-                    <tbody>
-                        <!-- build 12×12 table (frame + 10×10 board + frame) -->
-                        <!-- Top frame -->
-                        <tr>
-                            <td class="frame"></td>
-                            <td class="frame"></td>
-                            <td class="frame"></td>
-                            <td class="frame"></td>
-                            <td class="frame"></td>
-                            <td class="frame"></td>
-                            <td class="frame"></td>
-                            <td class="frame"></td>
-                            <td class="frame"></td>
-                            <td class="frame"></td>
-                            <td class="frame"></td>
-                            <td class="frame"></td>
-                        </tr>
+            <table id="design_table" border="1" cellspacing="0" cellpadding="0">
+                <tbody>
 
-                        <!-- Board rows -->
-                        <!-- Each row: frame + 10 cells + frame -->
-                        <!-- 10 rows -->
-                        ${[...Array(10)].map(() => `
-                        <tr>
-                            <td class="frame"></td>
-                            ${[...Array(10)].map(() => `<td class="board"></td>`).join('')}
-                            <td class="frame"></td>
-                        </tr>
-                        `).join('')}
-
-                        <!-- Bottom frame -->
-                        <tr>
-                            <td class="frame"></td>
-                            <td class="frame"></td>
-                            <td class="frame"></td>
-                            <td class="frame"></td>
-                            <td class="frame"></td>
-                            <td class="frame"></td>
-                            <td class="frame"></td>
-                            <td class="frame"></td>
-                            <td class="frame"></td>
-                            <td class="frame"></td>
-                            <td class="frame"></td>
-                            <td class="frame"></td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <div style="margin-top:10px;">
-                    <button id="design_button_submit">Test</button>
-                    <button id="design_button_clearall" onclick="clear_call_button_press()">Clear</button>
-                </div>
-            </div>
-
-            <!-- ===== PRODUCTION BOARD (CANVAS) ===== -->
-            <div id="production_area" style="visibility:hidden;">
-                <h3 id="production_title">Production</h3>
-                <canvas id="Canvas" width="400" height="400"
-                        style="border:1px solid black; background:white;"></canvas>
-                <div id="error_messages" style="color:red; margin-top:10px;"></div>
-            </div>
-
-            <!-- ===== SCORE BOARD ===== -->
-            <div id="score_area" style="visibility:hidden;">
-                <h3 id="score_title">Results</h3>
-
-                <table>
+                    <!-- Top frame -->
                     <tr>
-                        <td id="scoreboard_grey_cells">Blocks</td>
-                        <td id="markedCells"></td>
+                        <td class="frame"></td><td class="frame"></td><td class="frame"></td><td class="frame"></td>
+                        <td class="frame"></td><td class="frame"></td><td class="frame"></td><td class="frame"></td>
+                        <td class="frame"></td><td class="frame"></td><td class="frame"></td><td class="frame"></td>
                     </tr>
-                    <tr>
-                        <td id="scoreboard_penalty_cells">Mismatched</td>
-                        <td id="penaltyCells"></td>
-                    </tr>
-                    <tr>
-                        <td id="scoreboard_effiency">Structure's cost</td>
-                        <td id="score"></td>
-                    </tr>
-                    <tr>
-                        <td id="scoreboard_high_score">Your lowest Structure's cost</td>
-                        <td id="highScore"></td>
-                    </tr>
-                </table>
-            </div>
 
-        </div> <!-- end grids row -->
+                    <!-- 10 rows of board -->
+                    <!-- Each: frame + 10 board cells + frame -->
+                    <!-- row 1 -->
+                    <tr>
+                        <td class="frame"></td>
+                        <td class="board"></td><td class="board"></td><td class="board"></td><td class="board"></td><td class="board"></td>
+                        <td class="board"></td><td class="board"></td><td class="board"></td><td class="board"></td><td class="board"></td>
+                        <td class="frame"></td>
+                    </tr>
 
-    </div> <!-- end all_game_elements -->
+                    <!-- row 2 -->
+                    <tr>
+                        <td class="frame"></td>
+                        <td class="board"></td><td class="board"></td><td class="board"></td><td class="board"></td><td class="board"></td>
+                        <td class="board"></td><td class="board"></td><td class="board"></td><td class="board"></td><td class="board"></td>
+                        <td class="frame"></td>
+                    </tr>
 
-</body>
-</html>
+                    <!-- row 3 -->
+                    <tr>
+                        <td class="frame"></td>
+                        <td class="board"></td><td class="board"></td><td class="board"></td><td class="board"></td><td class="board"></td>
+                        <td class="board"></td><td class="board"></td><td class="board"></td><td class="board"></td><td class="board"></td>
+                        <td class="frame"></td>
+                    </tr>
+
+                    <!-- row 4 -->
+                    <tr>
+                        <td class="frame"></td>
+                        <td class="board"></td><td class="board"></td><td class="board"></td><td class="board"></td><td class="board"></td>
+                        <td class="board"></td><td class="board"></td><td class="board"></td><td class="board"></td><td class="board"></td>
+                        <td class="frame"></td>
+                    </tr>
+
+                    <!-- row 5 -->
+                    <tr>
+                        <td class="frame"></td>
+                        <td class="board"></td><td class="board"></td><td class="board"></td><td class="board"></td><td class="board"></td>
+                        <td class="board"></td><td class="board"></td><td class="board"></td><td class="board"></td><td class="board"></td>
+                        <td class="frame"></td>
+                    </tr>
+
+                    <!-- row 6 -->
+                    <tr>
+                        <td class="frame"></td>
+                        <td class="board"></td><td class="board"></td><td class="board"></td><td class="board"></td><td class="board"></td>
+                        <td clas
