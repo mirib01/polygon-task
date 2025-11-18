@@ -1,0 +1,49 @@
+
+
+vertical {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin:5px;
+}
+
+horizontal {
+	display: flex;
+    flex-direction: row;
+    align-items: start;
+    margin:3px;
+}
+
+table {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+    margin:3px;
+}
+
+div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.frame {
+    background-color: #C6E0B4;
+    width: 25px;
+    height: 25px;
+	text-align: center;
+}
+
+.board {
+	background-color: #f1f1f1;
+}
+
+.board-selected {
+	background-color: #f9f480;	
+}
+
+.board-tutorial-blue {
+    background-color: cyan;
+}
