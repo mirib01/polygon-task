@@ -11,38 +11,131 @@
 
     <link rel="stylesheet" type="text/css" href="style.css">
 
-    <script defer src="heb.js"></script>
-    <script defer src="eng.js"></script>
+    <script>
+        /* Load English translation immediately */
+        const engTrans = {
+            "tutorial_1_desc": "This is a short instruction before the challenge starts.\nClicking on the board using the mouse can fill in or remove blocks.\nUse the mouse to fill a sequence of blocks on the board.",
+            "tutorial_next_button": "Next >",
+            "tutorial_back_button": "< Back",
+            "tutorial_2_desc": "tutorial_2_text",
+            "game_design_title": "Design",
+            "design_button_submit": "Test",
+            "design_button_clearall": "Clear",
+            "game_desc": "Challange - game description",
+            "production_title": "Production",
+            "score_title": "Results",
+            "scoreboard_grey_cells": "Blocks",
+            "scoreboard_penalty_cells": "Mismatched",
+            "scoreboard_effiency": "Structure's cost",
+            "scoreboard_high_score": "Your lowest Structure's cost",
+            "press_submit": "Press Test before pressing Next",
+            "tutorial_3_desc": "tutorial_3_text",
+            "tutorial_4_desc": "tutorial_4_text",
+            "tutorial_5_desc": "Imagine wrapping a string around a Structure- This will create a shape on the Production board.\nPress Test to create a shape.",
+            "tutorial_6_desc": "Blocks are used to construct structures. A structure is a set of interconnected blocks.\nAdd one block to construct a structure.",
+            "tutorial_7_desc": "Notice that corners of blocks do not establish connections.\nAdd one block to achieve a valid Structure.",
+            "tutorial_8_desc": "tutorial_8_text not adjacent",
+            "tutorial_9_desc": "Add some blocks to achieve a valid Structure.",
+            "tutorial_10_desc": "Every shape you create will be compared to a circle.\nPress Test to create a shape and observe its overlapping with the circle",
+            "tutorial_10_2_desc": "Cells assigned to the shape but not to the circle and vice versa are marked by red X’s.\nThese cells do not match the shape created and the circle.",
+            "tutorial_11_desc": "Every block costs 1 point.\nEvery mismatched cell costs 1 point.\nThe cost of the tested Structure is displayed.",
+            "tutorial_11_2_desc": "The challenge -\nDesign a Structure that reduces costs to the minimum!",
+            "tutorial_12_1_desc": "You will have {0} minutes for the task.",
+            "tutorial_2_check_fail": "Please fill in at least 5-10 blocks",
+            "tutorial_12_desc": "Design a Structure with the lowest cost.",
+            "no_connectivity": "This is not a valid Structure.\nCorrect the design - all blocks must be interconnected.",
+            "test_end": "End of game",
+            "intro_large_header": "Welcome to the Game of -",
+            "intro_large_header_2": "Structures",
+            "start_button": "Start",
+            "intro_small_header": "Please enter the unique id given to you",
+            "minimize_grey_cells": "Well done. Minimize further the number of blocks",
+            "game_desc": "Design and test structures on the Design Board to maximize overlaps with the circle on the Production Board.\nAim for cost-efficiency by minimizing block usage and reducing mismatched cells.\nKeep refining your structures until the time is up",
+            "timer_desc": "Time left"
+        };
+    </script>
+
     <script defer src="script.js"></script>
 </head>
 
 <body>
 
-    <!-- LANGUAGE BUTTONS -->
-    <button id="eng_btn" onclick="switchToEnglish()">English</button>
-    <button id="heb_btn" onclick="switchToHebrew()">עברית</button>
+<!-- INTRO SCREEN -->
+<div id="intro" style="display:flex; flex-direction:column; align-items:center;">
+    <h1 id="largeHeader"></h1>
+    <h2 id="largeHeader2ndRow"></h2>
+    <h3 id="smallHeader"></h3>
 
-    <!-- INTRO SCREEN -->
-    <div id="intro_screen" class="screen">
-        <div id="intro_text"></div>
-    </div>
+    <input id="manual_id_text" style="display:none;" placeholder="Enter ID">
 
-    <!-- TUTORIAL SCREEN -->
-    <div id="tutorial_screen" class="screen">
-        <div id="tutorial_text"></div>
-    </div>
+    <button id="introStart" onclick="startBtnPressed()">Start</button>
+</div>
 
-    <!-- GAME SCREEN -->
-    <div id="game_screen" class="screen">
-        <div id="messages"></div>
-        <canvas id="polygonCanvas"></canvas>
-    </div>
+<!-- MAIN GAME AREA -->
+<div id="all_game_elements" style="display:none; flex-direction:column; align-items:center;">
 
-    <!-- TUTORIAL NAVIGATION -->
     <div id="tutorial_controls">
-        <button id="tutorial_back" onclick="onTutorialBack()">Back</button>
-        <button id="tutorial_next" onclick="onTutorialNext()">Next</button>
+        <button id="tutorial_back" onclick="onTutorialBack()">< Back</button>
+        <button id="tutorial_next" onclick="onTutorialNext()">Next ></button>
+        <div id="messages"></div>
     </div>
+
+    <!-- DESIGN AREA -->
+    <div id="design_area" style="display:flex; flex-direction:column;">
+        <h2 id="design_title"></h2>
+
+        <table id="design_table">
+            <!-- 10×10 board -->
+            <tbody>
+            <!-- row 0 (header border) -->
+            <tr><td class="frame"></td><td class="frame"></td><td class="frame"></td><td class="frame"></td><td class="frame"></td><td class="frame"></td><td class="frame"></td><td class="frame"></td><td class="frame"></td><td class="frame"></td></tr>
+
+            <!-- rows 1–10 -->
+            <!-- each row builds the 10×10 board -->
+            <script>
+                for (let r = 1; r <= 10; r++) {
+                    document.write("<tr>");
+                    for (let c = 1; c <= 10; c++) {
+                        document.write(`<td class="board"></td>`);
+                    }
+                    document.write("</tr>");
+                }
+            </script>
+
+            <!-- row 11 (footer border) -->
+            <tr><td class="frame"></td><td class="frame"></td><td class="frame"></td><td class="frame"></td><td class="frame"></td><td class="frame"></td><td class="frame"></td><td class="frame"></td><td class="frame"></td><td class="frame"></td></tr>
+            </tbody>
+        </table>
+
+        <button id="design_button_submit">Test</button>
+        <button id="design_button_clearall" onclick="clear_call_button_press()">Clear</button>
+    </div>
+
+    <!-- PRODUCTION AREA -->
+    <div id="production_area" style="display:none; flex-direction:column;">
+        <h2 id="production_title"></h2>
+        <canvas id="Canvas" width="400" height="400"></canvas>
+        <div id="error_messages"></div>
+    </div>
+
+    <!-- SCORE AREA -->
+    <div id="score_area" style="display:none;">
+        <h2 id="score_title"></h2>
+
+        <p><span id="scoreboard_grey_cells"></span>: <span id="markedCells"></span></p>
+        <p><span id="scoreboard_penalty_cells"></span>: <span id="penaltyCells"></span></p>
+        <p><span id="scoreboard_effiency"></span>: <span id="score"></span></p>
+        <p><span id="scoreboard_high_score"></span>: <span id="highScore"></span></p>
+
+        <div id="counter"></div>
+    </div>
+
+</div>
+
+<script>
+    // Force English translation
+    translation = engTrans;
+</script>
 
 </body>
 </html>
