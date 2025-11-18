@@ -1,3 +1,49 @@
+/* RESET FULL */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    font-family: 'Open Sans', Arial, sans-serif !important;
+    background: white;
+    margin: 15px; /* בדיוק כמו technion.link */
+}
+
+/* TABLES EXACT MATCH */
+table {
+    border-collapse: collapse;
+}
+
+/* Exact squares like technion.link */
+.board, .frame {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.frame {
+    background-color: #C6E0B4;
+    font-size: 14px;
+}
+
+/* Grey cells inside */
+.board {
+    background-color: #f1f1f1;
+}
+
+.board-selected {
+    background-color: #f9f480 !important;
+}
+
+canvas {
+    width: 340px !important;
+    height: 340px !important;
+    border: 1px solid transparent;
+    display: block;
+}
 
 
 vertical {
