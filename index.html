@@ -14,11 +14,6 @@
     <script defer src="script.js"></script>
 
     <title>Polygon Challenge</title>
-
-    <style>
-        .horizontal { display:flex; flex-direction:row; align-items:center; }
-        .vertical { display:flex; flex-direction:column; align-items:center; }
-    </style>
 </head>
 
 <body>
@@ -28,7 +23,6 @@
 
         <div class="horizontal">
             <button id='tutorial_back' onclick="onTutorialBack()">Back</button>
-            <div>&nbsp;&nbsp;</div>
             <button id='tutorial_next' onclick="onTutorialNext()">Next</button>
         </div>
 
@@ -45,26 +39,19 @@
         <button id='introStart' onclick="startBtnPressed()">Start</button>
     </div>
 
-    <div class="horizontal" id='all_game_elements' style='visibility:hidden;'>
-
+    <!-- MAIN LAYOUT -->
+    <div id='all_game_elements'>
 
         <!-- DESIGN AREA -->
-        <div class="vertical" id='design_area'>
+        <div class="vertical board-section" id='design_area'>
             <h3 id='design_title'>Design</h3>
 
             <table id='design_table' dir='ltr'>
                 <tr>
                     <td class="frame"></td>
-                    <td class="frame">1</td>
-                    <td class="frame">2</td>
-                    <td class="frame">3</td>
-                    <td class="frame">4</td>
-                    <td class="frame">5</td>
-                    <td class="frame">6</td>
-                    <td class="frame">7</td>
-                    <td class="frame">8</td>
-                    <td class="frame">9</td>
-                    <td class="frame">10</td>
+                    <td class="frame">1</td><td class="frame">2</td><td class="frame">3</td><td class="frame">4</td>
+                    <td class="frame">5</td><td class="frame">6</td><td class="frame">7</td><td class="frame">8</td>
+                    <td class="frame">9</td><td class="frame">10</td>
                     <td class="frame"></td>
                 </tr>
 
@@ -82,30 +69,21 @@
 
                 <tr>
                     <td class="frame"></td>
-                    <td class="frame">1</td>
-                    <td class="frame">2</td>
-                    <td class="frame">3</td>
-                    <td class="frame">4</td>
-                    <td class="frame">5</td>
-                    <td class="frame">6</td>
-                    <td class="frame">7</td>
-                    <td class="frame">8</td>
-                    <td class="frame">9</td>
-                    <td class="frame">10</td>
+                    <td class="frame">1</td><td class="frame">2</td><td class="frame">3</td><td class="frame">4</td>
+                    <td class="frame">5</td><td class="frame">6</td><td class="frame">7</td><td class="frame">8</td>
+                    <td class="frame">9</td><td class="frame">10</td>
                     <td class="frame"></td>
                 </tr>
             </table>
 
-            <div class="horizontal">
-                <button id='design_button_submit' onclick="checkBoard()">Submit</button>
-                <div>&nbsp;&nbsp;</div>
+            <div id="design_buttons_container">
+                <button id='design_button_submit' onclick="checkBoard()">Test</button>
                 <button id='design_button_clearall' onclick="clear_call_button_press()">Clear</button>
             </div>
         </div>
 
-
         <!-- PRODUCTION AREA -->
-        <div class="vertical" id='production_area'>
+        <div class="vertical board-section" id='production_area'>
             <h3 id='production_title'>Production</h3>
 
             <table dir='ltr'>
@@ -119,12 +97,9 @@
 
                 <tr>
                     <td class="frame">1</td>
-
-                    <!-- 🔥 FIXED CANVAS – EXACT MEASUREMENTS FROM TECHNION VERSION -->
                     <td colspan="10" rowspan="10">
-                        <canvas id="Canvas" width="278" height="278" style="background-color: #f1f1f1;"></canvas>
+                        <canvas id="Canvas"></canvas>
                     </td>
-
                     <td class="frame">1</td>
                 </tr>
 
@@ -145,16 +120,13 @@
                     <td class="frame"></td>
                 </tr>
             </table>
-
-            <button id="view_design_area" onclick="switchToDesignMode()" style='visibility:hidden;'>Edit</button>
         </div>
 
-
         <!-- SCORE AREA -->
-        <div class="vertical" id='score_area'>
+        <div class="vertical board-section" id='score_area'>
             <h3 id='score_title'>Results</h3>
-
-            <table style="background-color: #f1f1f1; min-width:175px;">
+            
+            <table class="results-table">
                 <tr><td id='scoreboard_grey_cells'>Grey cells</td><td><img src="selectedBrd.png" width="25"></td><td id="markedCells"></td></tr>
                 <tr><td id='scoreboard_penalty_cells'>Red cells</td><td><img src="mismatchedBrd.png" width="25"></td><td id="penaltyCells"></td></tr>
 
@@ -168,13 +140,9 @@
 
             <div id="counter"></div>
 
-            <table id="table_high_score" style="background-color: #f1f1f1; min-width:175px;">
-                <tr style="background-color:#C6E0B4;">
-                    <th id='scoreboard_high_score'>Best score</th>
-                </tr>
-                <tr>
-                    <th id="highScore"></th>
-                </tr>
+            <table id="table_high_score" class="results-table">
+                <tr><th id='scoreboard_high_score'>Best score</th></tr>
+                <tr><th id="highScore"></th></tr>
             </table>
         </div>
 
