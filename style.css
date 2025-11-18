@@ -1,58 +1,73 @@
-/* BASIC PAGE */
+/* GENERAL RESET */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
 body {
-    font-family: 'Open Sans', sans-serif;
-    margin: 20px;
+    font-family: 'Open Sans', Arial, sans-serif;
+    background: white;
+    margin: 15px;
+    overflow-x: hidden;
 }
 
-/* HEADERS */
-h3, h2 {
-    font-family: 'Montserrat', sans-serif;
+/* MAIN FLEX GRID */
+#all_game_elements {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;        /* ← מרחק יפה בין שלושת האזורים */
+    margin-top: 20px;
 }
 
-/* TABLE BEHAVIOR */
-table {
-    border-collapse: collapse;
+/* BOARD SECTIONS */
+.board-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
 }
 
-/* GRID CELLS – EXACT MATCH */
+/* RESPONSIVE SQUARES */
+.board, .frame {
+    aspect-ratio: 1 / 1;
+    width: min(3vw, 30px);
+    max-width: 30px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: min(2vw, 14px);
+}
+
 .frame {
     background-color: #C6E0B4;
-    text-align: center;
-    width: 30px;
-    height: 30px;
-    border: 1px solid #999;
-    font-size: 14px;
 }
 
 .board {
     background-color: #f1f1f1;
-    width: 30px;
-    height: 30px;
-    border: 1px solid #ccc;
 }
 
-.board.selected {
-    background-color: #ffff99;
+.board-selected {
+    background-color: #f9f480 !important;
 }
 
-.board.redcell {
-    background-color: #ffcccc;
-}
-
-/* FLEX HELPERS */
-.horizontal {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-.vertical {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+.board-tutorial-blue { background-color: cyan; }
 
 /* CANVAS */
 #Canvas {
-    border: 1px solid #999;
+    width: min(35vw, 340px);
+    height: min(35vw, 340px);
+    background-color: #f1f1f1;
+}
+
+/* BUTTONS ALWAYS VISIBLE */
+#design_buttons_container {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+/* RESULTS TABLE */
+.results-table {
+    background: #f1f1f1;
+    min-width: 175px;
+    margin-top: 10px;
 }
