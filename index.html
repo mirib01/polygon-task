@@ -9,170 +9,180 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="style.css"/>
 
+    <!-- English only -->
     <script defer src="eng.js"></script>
     <script defer src="script.js"></script>
 
     <title>Polygon Challenge</title>
+
+    <style>
+        .horizontal { display:flex; flex-direction:row; align-items:center; }
+        .vertical { display:flex; flex-direction:column; align-items:center; }
+    </style>
 </head>
 
 <body>
 
-<div id="tutorial_controls">
-    <h3><div id="messages"></div></h3>
-
-    <div class="horizontal">
-        <button id='tutorial_back' onclick="onTutorialBack()">Back</button>
-        <div>&nbsp;&nbsp;</div>
-        <button id='tutorial_next' onclick="onTutorialNext()">Next</button>
-    </div>
-
-    <hr/>
-</div>
-
-<div class="vertical" id="intro">
-    <div id="largeHeader" style="font-size: 200%;"></div>
-    <div id="largeHeader2ndRow" style="font-size: 300%;"></div>
-     
-    <h2 id="smallHeader"></h2>
-    <input type="text" id="manual_id_text" style="visibility:hidden;" autofocus><br>
-    <img id="gameImg" src="board.png" alt="board preview" width="250" height="250">
-    <button id='introStart' onclick="startBtnPressed()">Start</button>
-</div>
-
-<div class="horizontal" id='all_game_elements' style='visibility:hidden;'>
-
-    <!-- DESIGN AREA -->
-    <div class="vertical" id='design_area'>
-        <h3 id='design_title'>Design</h3>
-
-        <table id='design_table' dir='ltr'>
-            <tr>
-                <td class="frame"></td>
-                <td class="frame">1</td>
-                <td class="frame">2</td>
-                <td class="frame">3</td>
-                <td class="frame">4</td>
-                <td class="frame">5</td>
-                <td class="frame">6</td>
-                <td class="frame">7</td>
-                <td class="frame">8</td>
-                <td class="frame">9</td>
-                <td class="frame">10</td>
-                <td class="frame"></td>
-            </tr>
-
-            <script>
-                for (let r=1; r<=10; r++){
-                    document.write("<tr>");
-                    document.write(`<td class="frame">${r}</td>`);
-                    for (let c=1; c<=10; c++){
-                        document.write(`<td class="board"></td>`);
-                    }
-                    document.write(`<td class="frame">${r}</td>`);
-                    document.write("</tr>");
-                }
-            </script>
-
-            <tr>
-                <td class="frame"></td>
-                <td class="frame">1</td>
-                <td class="frame">2</td>
-                <td class="frame">3</td>
-                <td class="frame">4</td>
-                <td class="frame">5</td>
-                <td class="frame">6</td>
-                <td class="frame">7</td>
-                <td class="frame">8</td>
-                <td class="frame">9</td>
-                <td class="frame">10</td>
-                <td class="frame"></td>
-            </tr>
-        </table>
+    <div id="tutorial_controls">
+        <h3><div id="messages"></div></h3>
 
         <div class="horizontal">
-            <button id='design_button_submit' onclick="checkBoard()">Submit</button>
+            <button id='tutorial_back' onclick="onTutorialBack()">Back</button>
             <div>&nbsp;&nbsp;</div>
-            <button id='design_button_clearall' onclick="clear_call_button_press()">Clear</button>
+            <button id='tutorial_next' onclick="onTutorialNext()">Next</button>
         </div>
+
+        <hr/>
     </div>
 
-    <!-- PRODUCTION AREA -->
-    <div class="vertical" id='production_area'>
-        <h3 id='production_title'>Production</h3>
-
-        <table dir='ltr'>
-            <tr>
-                <td class="frame"></td>
-                <td class="frame">1</td><td class="frame">2</td><td class="frame">3</td>
-                <td class="frame">4</td><td class="frame">5</td><td class="frame">6</td>
-                <td class="frame">7</td><td class="frame">8</td><td class="frame">9</td>
-                <td class="frame">10</td>
-                <td class="frame"></td>
-            </tr>
-
-            <tr>
-                <td class="frame">1</td>
-                <td colspan="10" rowspan="10">
-                    <canvas id="Canvas" width="278" height="278"></canvas>
-                </td>
-                <td class="frame">1</td>
-            </tr>
-
-            <script>
-                for (let r=2; r<=10; r++){
-                    document.write("<tr>");
-                    document.write(`<td class="frame">${r}</td>`);
-                    document.write(`<td class="frame">${r}</td>`);
-                    document.write("</tr>");
-                }
-            </script>
-
-            <tr>
-                <td class="frame"></td>
-                <td class="frame">1</td><td class="frame">2</td><td class="frame">3</td>
-                <td class="frame">4</td><td class="frame">5</td><td class="frame">6</td>
-                <td class="frame">7</td><td class="frame">8</td><td class="frame">9</td>
-                <td class="frame">10</td>
-                <td class="frame"></td>
-            </tr>
-        </table>
-
-        <button id="view_design_area" onclick="switchToDesignMode()" style='visibility:hidden;'>Edit</button>
+    <div class="vertical" id="intro">
+        <div id="largeHeader" style="font-size: 200%;"></div>
+        <div id="largeHeader2ndRow" style="font-size: 300%;"></div>
+         
+        <h2 id="smallHeader"></h2>
+        <input type="text" id="manual_id_text" style="visibility:hidden;" autofocus><br>
+        <img id="gameImg" src="board.png" alt="board preview" width="250" height="250">
+        <button id='introStart' onclick="startBtnPressed()">Start</button>
     </div>
 
-    <!-- SCORE -->
-    <div class="vertical" id='score_area'>
-        <h3 id='score_title'>Results</h3>
-        
-        <table style="background-color: #f1f1f1; min-width:175px;">
-            <tr><td id='scoreboard_grey_cells'>Grey cells</td><td><img src="selectedBrd.png" width="25"></td><td id="markedCells"></td></tr>
-            <tr><td id='scoreboard_penalty_cells'>Red cells</td><td><img src="mismatchedBrd.png" width="25"></td><td id="penaltyCells"></td></tr>
+    <div class="horizontal" id='all_game_elements' style='visibility:hidden;'>
 
-            <tr><td colspan="3">&nbsp;</td></tr>
+        <!-- DESIGN AREA -->
+        <div class="vertical" id='design_area'>
+            <h3 id='design_title'>Design</h3>
 
-            <tr>
-                <th id='scoreboard_effiency'>Efficiency</th><td></td>
-                <th id="score"></th>
-            </tr>
-        </table>
+            <table id='design_table' dir='ltr'>
+                <!-- Row numbers top -->
+                <tr>
+                    <td class="frame"></td>
+                    <td class="frame">1</td>
+                    <td class="frame">2</td>
+                    <td class="frame">3</td>
+                    <td class="frame">4</td>
+                    <td class="frame">5</td>
+                    <td class="frame">6</td>
+                    <td class="frame">7</td>
+                    <td class="frame">8</td>
+                    <td class="frame">9</td>
+                    <td class="frame">10</td>
+                    <td class="frame"></td>
+                </tr>
 
-        <div id="counter"></div>
+                <!-- 10×10 board -->
+                <!-- I am keeping EXACTLY your structure (critical for script.js) -->
+                <!-- Rows 1–10 -->
+                <script>
+                    for (let r=1; r<=10; r++){
+                        document.write("<tr>");
+                        document.write(`<td class="frame">${r}</td>`);
+                        for (let c=1; c<=10; c++){
+                            document.write(`<td class="board"></td>`);
+                        }
+                        document.write(`<td class="frame">${r}</td>`);
+                        document.write("</tr>");
+                    }
+                </script>
 
-        <table id="table_high_score" style="background-color: #f1f1f1; min-width:175px;">
-            <tr style="background-color:#C6E0B4;">
-                <th id='scoreboard_high_score'>Best score</th>
-            </tr>
-            <tr>
-                <th id="highScore"></th>
-            </tr>
-        </table>
+                <!-- Row numbers bottom -->
+                <tr>
+                    <td class="frame"></td>
+                    <td class="frame">1</td>
+                    <td class="frame">2</td>
+                    <td class="frame">3</td>
+                    <td class="frame">4</td>
+                    <td class="frame">5</td>
+                    <td class="frame">6</td>
+                    <td class="frame">7</td>
+                    <td class="frame">8</td>
+                    <td class="frame">9</td>
+                    <td class="frame">10</td>
+                    <td class="frame"></td>
+                </tr>
+            </table>
+
+            <div class="horizontal">
+                <button id='design_button_submit' onclick="checkBoard()">Submit</button>
+                <div>&nbsp;&nbsp;</div>
+                <button id='design_button_clearall' onclick="clear_call_button_press()">Clear</button>
+            </div>
+        </div>
+
+        <!-- PRODUCTION AREA -->
+        <div class="vertical" id='production_area'>
+            <h3 id='production_title'>Production</h3>
+
+            <table dir='ltr'>
+                <tr>
+                    <td class="frame"></td>
+                    <td class="frame">1</td><td class="frame">2</td><td class="frame">3</td><td class="frame">4</td>
+                    <td class="frame">5</td><td class="frame">6</td><td class="frame">7</td><td class="frame">8</td>
+                    <td class="frame">9</td><td class="frame">10</td>
+                    <td class="frame"></td>
+                </tr>
+
+                <tr>
+                    <td class="frame">1</td>
+                    <td colspan="10" rowspan="10">
+                        <canvas id="Canvas" width="278" height="278" style="background-color: #f1f1f1;"></canvas>
+                    </td>
+                    <td class="frame">1</td>
+                </tr>
+
+                <!-- side row labels 2–10 -->
+                <script>
+                    for (let r=2; r<=10; r++){
+                        document.write("<tr>");
+                        document.write(`<td class="frame">${r}</td>`);
+                        document.write(`<td class="frame">${r}</td>`);
+                        document.write("</tr>");
+                    }
+                </script>
+
+                <tr>
+                    <td class="frame"></td>
+                    <td class="frame">1</td><td class="frame">2</td><td class="frame">3</td><td class="frame">4</td>
+                    <td class="frame">5</td><td class="frame">6</td><td class="frame">7</td><td class="frame">8</td>
+                    <td class="frame">9</td><td class="frame">10</td>
+                    <td class="frame"></td>
+                </tr>
+            </table>
+
+            <button id="view_design_area" onclick="switchToDesignMode()" style='visibility:hidden;'>Edit</button>
+        </div>
+
+        <!-- SCORE AREA -->
+        <div class="vertical" id='score_area'>
+            <h3 id='score_title'>Results</h3>
+            
+            <table style="background-color: #f1f1f1; min-width:175px;">
+                <tr><td id='scoreboard_grey_cells'>Grey cells</td><td><img src="selectedBrd.png" width="25"></td><td id="markedCells"></td></tr>
+                <tr><td id='scoreboard_penalty_cells'>Red cells</td><td><img src="mismatchedBrd.png" width="25"></td><td id="penaltyCells"></td></tr>
+
+                <tr><td colspan="3">&nbsp;</td></tr>
+
+                <tr>
+                    <th id='scoreboard_effiency'>Efficiency</th><td></td>
+                    <th id="score"></th>
+                </tr>
+            </table>
+
+            <div id="counter"></div>
+
+            <table id="table_high_score" style="background-color: #f1f1f1; min-width:175px;">
+                <tr style="background-color:#C6E0B4;">
+                    <th id='scoreboard_high_score'>Best score</th>
+                </tr>
+                <tr>
+                    <th id="highScore"></th>
+                </tr>
+            </table>
+        </div>
+
     </div>
 
-</div>
-
-<div class="horizontal">
-    <div id="error_messages"></div>
-</div>
+    <div class="horizontal">
+        <div id="error_messages"></div>
+    </div>
 
 </body>
 </html>
